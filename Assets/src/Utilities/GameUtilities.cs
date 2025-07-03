@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using DG.Tweening;
-using GameContent.Scripts.Interactable;
 using UnityEngine;
+
+#if DOTWEEN
+using DG.Tweening;
+#endif
 
 namespace JamalArouna.Utilities
 {
@@ -174,6 +176,7 @@ namespace JamalArouna.Utilities
         }
 
         #region DOTween Extensions
+        #if DOTWEEN
         public static void KillIfActive(this Tween tween)
         {
             if (tween != null && tween.IsActive()) 
@@ -192,6 +195,7 @@ namespace JamalArouna.Utilities
                 sequence.Kill(true); // also completes the sequence 
             return DOTween.Sequence();
         }
+        #endif
         #endregion
 
         #region Transform, GameObject

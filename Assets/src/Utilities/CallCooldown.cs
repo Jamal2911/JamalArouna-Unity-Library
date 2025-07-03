@@ -1,6 +1,8 @@
 using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
+
+#if ODIN_INSPECTOR
+    using Sirenix.OdinInspector;
 
 namespace JamalArouna.Utilities
 {
@@ -108,3 +110,4 @@ namespace JamalArouna.Utilities
         public void SetCooldown(float cooldownDuration) => _cooldownTime = cooldownDuration;
     }
 }
+#endif
