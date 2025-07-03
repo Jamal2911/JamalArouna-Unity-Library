@@ -1,7 +1,8 @@
-using Sirenix.OdinInspector.Editor;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+
+#if ODIN_INSPECTOR 
+using Sirenix.OdinInspector.Editor;
 
 namespace JamalArouna.EditorTools
 {
@@ -285,3 +286,4 @@ namespace JamalArouna.EditorTools
         }
     }   
 }
+#endif

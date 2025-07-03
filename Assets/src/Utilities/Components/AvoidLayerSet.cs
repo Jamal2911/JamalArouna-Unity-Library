@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace GameContent.Scripts.Interactable
+namespace JamalArouna.Utilities.Components
 {
     public class AvoidLayerSet : MonoBehaviour { }
 }
