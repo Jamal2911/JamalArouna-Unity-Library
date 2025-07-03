@@ -1,7 +1,7 @@
 {
   "name": "com.jamal.arouna.library",
   "version": "1.0.0",
-  "displayName": "Jamal Arouna Unity Library",
+  "displayName": "JamalArouna.Library",
   "description": "A collection of useful utilities and components.",
   "unity": "2021.3",
   "author": {
