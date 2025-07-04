@@ -1,9 +1,7 @@
 {
     "name": "JamalArouna.GameObjectPicker.Editor",
     "rootNamespace": "",
-    "references": [
-        "GUID:3ca05e1f9c2074aba83e135fac05253c"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [
         "Editor"
