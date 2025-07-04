@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿#if UNITY_EDITOR
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -31,3 +32,4 @@ namespace JamalArouna.Utilities
         }
     }
 }
+#endif
