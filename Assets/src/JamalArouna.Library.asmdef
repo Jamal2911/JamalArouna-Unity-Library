@@ -1,3 +1,16 @@
 {
-	"name": "JamalArouna.Library"
+    "name": "JamalArouna.Library",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3ca05e1f9c2074aba83e135fac05253c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

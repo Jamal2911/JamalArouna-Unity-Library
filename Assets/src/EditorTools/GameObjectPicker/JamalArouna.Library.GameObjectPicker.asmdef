@@ -1,3 +1,16 @@
 {
-	"name": "JamalArouna.Library.GameObjectPicker"
+    "name": "JamalArouna.Library.GameObjectPicker",
+    "rootNamespace": "",
+    "references": [
+        "GUID:86f5946191f5842d9901ee23486a23ec"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }
