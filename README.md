@@ -1,6 +1,7 @@
 # Jamal Arouna Unity Library
 
 A collection of reusable utilities, interfaces, and components for Unity projects.
+if manually added to the project, remove .asmdf files if needed.
 
 ## 📦 Installation
 
