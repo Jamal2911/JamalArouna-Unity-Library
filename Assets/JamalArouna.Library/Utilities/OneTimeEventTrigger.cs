@@ -15,7 +15,7 @@ namespace JamalArouna.Utilities
         private readonly Action action;
 
         /// <summary>
-        /// Executes the provided action **only once** when this method is called.
+        /// Executes the provided action only once when this method is called.
         /// Subsequent calls have no effect until <see cref="Reset"/> is called.
         /// </summary>
         public void TryTrigger()
