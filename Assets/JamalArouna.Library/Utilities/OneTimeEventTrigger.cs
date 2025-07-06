@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace JamalArouna.Utilities
@@ -14,50 +13,53 @@ namespace JamalArouna.Utilities
     {
         private bool triggered = false;
 
-        private readonly Action? syncAction;
-        private readonly Func<Awaitable>? asyncAction;
+        private Action? syncAction;
+        private Func<Awaitable>? asyncAction;
 
+        public OneTimeEventTrigger() { }
+        public OneTimeEventTrigger(Action action) => syncAction = action ?? throw new ArgumentNullException(nameof(action));
+        public OneTimeEventTrigger(Func<Awaitable> asyncAction) => this.asyncAction = asyncAction ?? throw new ArgumentNullException(nameof(asyncAction));
+        
         /// <summary>
-        /// Initializes the trigger with a synchronous action.
+        /// Triggers the stored synchronous action, or throws if not set.
         /// </summary>
-        /// <param name="action">The synchronous action to execute once. Cannot be null.</param>
-        public OneTimeEventTrigger(Action action) =>
-            syncAction = action ?? throw new ArgumentNullException(nameof(action));
+        public void TryTrigger() => TryTriggerInternal(syncAction ?? throw new InvalidOperationException("No synchronous action assigned."));
 
         /// <summary>
-        /// Initializes the trigger with an asynchronous action.
+        /// Triggers the given synchronous action once.
         /// </summary>
-        /// <param name="asyncAction">The asynchronous action to execute once. Cannot be null.</param>
-        public OneTimeEventTrigger(Func<Awaitable> asyncAction) =>
-            this.asyncAction = asyncAction ?? throw new ArgumentNullException(nameof(asyncAction));
+        public void TryTrigger(Action action) => TryTriggerInternal(action ?? throw new ArgumentNullException(nameof(action)));
 
         /// <summary>
-        /// Triggers the synchronous action if not already triggered.
+        /// Triggers the stored asynchronous action, or throws if not set.
         /// </summary>
-        public void TryTrigger()
-        {
-            if (!triggered && syncAction != null)
-            {
-                syncAction();
-                triggered = true;
-            }
-        }
+        public Awaitable TryTriggerAsync() => TryTriggerAsyncInternal(asyncAction ?? throw new InvalidOperationException("No asynchronous action assigned."));
 
         /// <summary>
-        /// Triggers the asynchronous action if not already triggered.
+        /// Triggers the given asynchronous action once.
         /// </summary>
-        public async Awaitable TryTriggerAsync()
-        {
-            if (!triggered && asyncAction != null)
-            {
-                await asyncAction();
-                triggered = true;
-            }
-        }
+        public Awaitable TryTriggerAsync(Func<Awaitable> action) => TryTriggerAsyncInternal(action ?? throw new ArgumentNullException(nameof(action)));
 
         /// <summary>
-        /// Resets the trigger, allowing it to be used again.
+        /// Resets the trigger state, allowing the action to be triggered again.
         /// </summary>
         public void Reset() => triggered = false;
+
+        // --- Internals ---
+        private void TryTriggerInternal(Action action)
+        {
+            if (triggered) return;
+            syncAction = action;
+            action();
+            triggered = true;
+        }
+
+        private async Awaitable TryTriggerAsyncInternal(Func<Awaitable> action)
+        {
+            if (triggered) return;
+            asyncAction = action;
+            await action();
+            triggered = true;
+        }
     }
 }
