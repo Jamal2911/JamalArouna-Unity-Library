@@ -190,12 +190,11 @@ namespace JamalArouna.Utilities
                 sequence.Kill(true); // also completes the sequence 
         }
         
-        public static Sequence KillAndSetGetNewSequence(this Sequence sequence)
+        public static void KillAndSetGetNewSequence(ref Sequence sequence)
         {
             if (sequence != null && sequence.IsActive()) 
                 sequence.Kill(true); // also completes the sequence 
             sequence = DOTween.Sequence();
-            return sequence;
         }
         #endif
         #endregion
