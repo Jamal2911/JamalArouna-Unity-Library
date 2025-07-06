@@ -53,6 +53,34 @@ namespace JamalArouna.Utilities
             animator.SetTrigger(triggerName);
             await Awaitable.EndOfFrameAsync();
         }
+        
+        /// <summary>
+        /// Runs an asynchronous loop for a specified duration, calling the provided update action each frame with a normalized time value.
+        /// </summary>
+        /// <param name="duration">The total duration of the loop in seconds.</param>
+        /// <param name="onUpdate">An action invoked every iteration with a float parameter representing normalized time (0 to 1).</param>
+        /// <param name="deltaTime">
+        /// Optional delta time to increment per loop iteration.  
+        /// If set to -1 (default), Time.deltaTime will be used.
+        /// </param>
+        /// <returns>A task representing the asynchronous loop operation.</returns>
+        public static async Awaitable WhileWithDuration(float duration, Action<float> onUpdate, float deltaTime = -1f)
+        {
+            float time = 0f;
+
+            while (time < duration)
+            {
+                float t = time / duration;
+
+                onUpdate?.Invoke(t);
+                
+                time += deltaTime == -1f ? Time.deltaTime : deltaTime;
+                await Awaitable.EndOfFrameAsync();
+            }
+
+            // Make Sure, time is t=1 at the end zum Schluss t=1 ist
+            onUpdate?.Invoke(1f);
+        }
 
         /// <summary>
         /// Rotates Vector around an Pivot
