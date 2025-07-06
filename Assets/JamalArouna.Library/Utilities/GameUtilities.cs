@@ -194,7 +194,8 @@ namespace JamalArouna.Utilities
         {
             if (sequence != null && sequence.IsActive()) 
                 sequence.Kill(true); // also completes the sequence 
-            return DOTween.Sequence();
+            sequence = DOTween.Sequence();
+            return sequence;
         }
         #endif
         #endregion
