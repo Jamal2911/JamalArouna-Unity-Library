@@ -15,7 +15,7 @@ namespace JamalArouna.Utilities
         private bool triggered = false;
 
         private readonly Action? syncAction;
-        private readonly Func<Task>? asyncAction;
+        private readonly Func<Awaitable>? asyncAction;
 
         /// <summary>
         /// Initializes the trigger with a synchronous action.
@@ -28,7 +28,7 @@ namespace JamalArouna.Utilities
         /// Initializes the trigger with an asynchronous action.
         /// </summary>
         /// <param name="asyncAction">The asynchronous action to execute once. Cannot be null.</param>
-        public OneTimeEventTrigger(Func<Task> asyncAction) =>
+        public OneTimeEventTrigger(Func<Awaitable> asyncAction) =>
             this.asyncAction = asyncAction ?? throw new ArgumentNullException(nameof(asyncAction));
 
         /// <summary>
