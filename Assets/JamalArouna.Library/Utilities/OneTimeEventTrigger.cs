@@ -1,10 +1,11 @@
 using System;
+using System.Threading.Tasks;
+using UnityEngine;
 
 namespace JamalArouna.Utilities
 {
     /// <summary>
-    /// Executes the provided action only once when <see cref="TryTrigger"/> is called.
-    /// Subsequent calls to <see cref="TryTrigger"/> have no effect until <see cref="Reset"/> is called.
+    /// Executes a provided action or asynchronous action only once when triggered.
     /// </summary>
     /// <remarks>
     /// Created by Jamal Arouna, 2025.
@@ -13,33 +14,49 @@ namespace JamalArouna.Utilities
     {
         private bool triggered = false;
 
-        /// <summary>
-        /// The action to execute once when triggered.
-        /// </summary>
-        private readonly Action action;
+        private readonly Action? syncAction;
+        private readonly Func<Task>? asyncAction;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OneTimeEventTrigger"/> class with the specified action.
+        /// Initializes the trigger with a synchronous action.
         /// </summary>
-        /// <param name="action">The action to execute only once. Cannot be null.</param>
-        /// <exception cref="ArgumentNullException">Thrown if <paramref name="action"/> is null.</exception>
-        public OneTimeEventTrigger(Action action) => this.action = action ?? throw new ArgumentNullException(nameof(action));
+        /// <param name="action">The synchronous action to execute once. Cannot be null.</param>
+        public OneTimeEventTrigger(Action action) =>
+            syncAction = action ?? throw new ArgumentNullException(nameof(action));
 
         /// <summary>
-        /// Executes the stored action if it has not been executed yet.
-        /// Marks the trigger as used. Further calls do nothing until <see cref="Reset"/> is called.
+        /// Initializes the trigger with an asynchronous action.
+        /// </summary>
+        /// <param name="asyncAction">The asynchronous action to execute once. Cannot be null.</param>
+        public OneTimeEventTrigger(Func<Task> asyncAction) =>
+            this.asyncAction = asyncAction ?? throw new ArgumentNullException(nameof(asyncAction));
+
+        /// <summary>
+        /// Triggers the synchronous action if not already triggered.
         /// </summary>
         public void TryTrigger()
         {
-            if (!triggered)
+            if (!triggered && syncAction != null)
             {
-                action();
+                syncAction();
                 triggered = true;
             }
         }
 
         /// <summary>
-        /// Resets the trigger, allowing the stored action to be executed again on the next call to <see cref="TryTrigger"/>.
+        /// Triggers the asynchronous action if not already triggered.
+        /// </summary>
+        public async Awaitable TryTriggerAsync()
+        {
+            if (!triggered && asyncAction != null)
+            {
+                await asyncAction();
+                triggered = true;
+            }
+        }
+
+        /// <summary>
+        /// Resets the trigger, allowing it to be used again.
         /// </summary>
         public void Reset() => triggered = false;
     }
