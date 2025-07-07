@@ -351,6 +351,20 @@ namespace JamalArouna.Utilities
         }
         
         #endregion
+        
+        /// <summary>
+        /// Returns a normalized progress value (0 to 1) indicating how far the given time 
+        /// is within the specified range.
+        /// </summary>
+        /// <param name="time">The current time to evaluate.</param>
+        /// <param name="rangeMin">The start of the time range.</param>
+        /// <param name="rangeMax">The end of the time range.</param>
+        /// <returns>A value between 0 and 1 representing the progress of time within the range.</returns>
+        public static float GetTimeProgress(float time, float rangeMin, float rangeMax)
+        {
+            return rangeMax == rangeMin ? 0f : // Avoid division by zero
+                Mathf.Clamp01((time - rangeMin) / (rangeMax - rangeMin));
+        }
 
     }
 }
