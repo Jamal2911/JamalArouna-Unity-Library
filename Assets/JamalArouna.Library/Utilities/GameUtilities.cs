@@ -360,7 +360,7 @@ namespace JamalArouna.Utilities
         /// <param name="rangeMin">The start of the time range.</param>
         /// <param name="rangeMax">The end of the time range.</param>
         /// <returns>A value between 0 and 1 representing the progress of time within the range.</returns>
-        public static float GetTimeProgress(float time, float rangeMin, float rangeMax)
+        public static float GetNormalizedTime(float time, float rangeMin, float rangeMax)
         {
             return rangeMax == rangeMin ? 0f : // Avoid division by zero
                 Mathf.Clamp01((time - rangeMin) / (rangeMax - rangeMin));
