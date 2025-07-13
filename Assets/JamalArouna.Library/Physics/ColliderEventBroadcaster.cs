@@ -62,52 +62,6 @@ namespace JamalArouna.Physics
         /// <param name="layerMask">Optional layer mask to filter results (default: all layers).</param>
         /// <param name="includeTriggers">Whether to include Trigger colliders (default: true).</param>
         /// <returns>Array of overlapping colliders.</returns>
-        public Collider[] OverlapCollider(LayerMask layerMask = default, bool includeTriggers = true)
-        {
-            if (_collider == null) _collider = GetComponent<Collider>();
-
-            if (layerMask == default) layerMask = ~0; // All layers
-            QueryTriggerInteraction triggerInteraction = includeTriggers ? QueryTriggerInteraction.Collide : QueryTriggerInteraction.Ignore;
-
-            Collider[] hits = null;
-
-            if (_collider is BoxCollider box)
-            {
-                Vector3 worldCenter = box.transform.TransformPoint(box.center);
-                Vector3 worldHalfExtents = Vector3.Scale(box.size * 0.5f, box.transform.lossyScale);
-                hits = UnityEngine.Physics.OverlapBox(worldCenter, worldHalfExtents, box.transform.rotation, layerMask, triggerInteraction);
-            }
-            else if (_collider is SphereCollider sphere)
-            {
-                Vector3 worldCenter = sphere.transform.TransformPoint(sphere.center);
-                float worldRadius = sphere.radius * Mathf.Max(
-                    sphere.transform.lossyScale.x,
-                    sphere.transform.lossyScale.y,
-                    sphere.transform.lossyScale.z);
-                hits = UnityEngine.Physics.OverlapSphere(worldCenter, worldRadius, layerMask, triggerInteraction);
-            }
-            else if (_collider is CapsuleCollider capsule)
-            {
-                Vector3 center = capsule.transform.TransformPoint(capsule.center);
-                float radius = capsule.radius * Mathf.Max(capsule.transform.lossyScale.x, capsule.transform.lossyScale.z);
-                float height = capsule.height * capsule.transform.lossyScale.y;
-
-                Vector3 dir = Vector3.up;
-                if (capsule.direction == 0) dir = capsule.transform.right;
-                else if (capsule.direction == 1) dir = capsule.transform.up;
-                else if (capsule.direction == 2) dir = capsule.transform.forward;
-
-                Vector3 point1 = center + dir * ((height / 2) - radius);
-                Vector3 point2 = center - dir * ((height / 2) - radius);
-
-                hits = UnityEngine.Physics.OverlapCapsule(point1, point2, radius, layerMask, triggerInteraction);
-            }
-            else
-            {
-                Debug.LogWarning($"Overlap for collider type {_collider.GetType().Name} is not implemented.");
-            }
-
-            return hits ?? Array.Empty<Collider>();
-        }
+        public Collider[] OverlapCollider(LayerMask layerMask = default, bool includeTriggers = true) => PhysicsUtilities.OverlapCollider(_collider, layerMask, includeTriggers);
     }   
 }
