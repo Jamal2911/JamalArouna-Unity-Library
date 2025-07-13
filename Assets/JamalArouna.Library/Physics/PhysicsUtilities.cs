@@ -73,5 +73,30 @@ namespace JamalArouna.Physics
 
             return hits ?? Array.Empty<Collider>();
         }
+        
+        /// <summary>
+        /// Searches through an array of colliders and tries to get the first component of type T found on any of them.
+        /// </summary>
+        /// <typeparam name="T">The component type to search for.</typeparam>
+        /// <param name="colliders">The array of colliders to check.</param>
+        /// <param name="component">
+        /// The first found component of type T, or null if none was found.
+        /// </param>
+        /// <returns>True if a component was found; otherwise, false.</returns>
+        public static bool TryGetComponentOutOfColliders<T>(Collider[] colliders, out T component) where T : Component
+        {
+            component = null;
+
+            if (colliders == null) return false;
+
+            foreach (var col in colliders)
+            {
+                if (col.TryGetComponent(out component))
+                    return true;
+            }
+
+            return false;
+        }
+
     }
 }
