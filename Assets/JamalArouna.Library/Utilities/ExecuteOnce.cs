@@ -9,48 +9,63 @@ namespace JamalArouna.Utilities
     public class ExecuteOnce
     {
         private bool triggered = false;
-        private Delegate? action;
+        private Delegate? storedAction;
 
         public ExecuteOnce() { }
 
-        /// <summary>
-        /// Creates an instance with a synchronous action.
-        /// </summary>
         public ExecuteOnce(Action sync) => Set(sync);
-
-        /// <summary>
-        /// Creates an instance with an asynchronous action.
-        /// </summary>
         public ExecuteOnce(Func<Awaitable> async) => Set(async);
 
         /// <summary>
-        /// Sets the synchronous action.
+        /// Sets a synchronous action to be invoked once.
         /// </summary>
-        public void Set(Action sync) => action = sync ?? throw new ArgumentNullException(nameof(sync));
+        public void Set(Action sync) => storedAction = sync ?? throw new ArgumentNullException(nameof(sync));
 
         /// <summary>
-        /// Sets the asynchronous action.
+        /// Sets an asynchronous action to be invoked once.
         /// </summary>
-        public void Set(Func<Awaitable> async) => action = async ?? throw new ArgumentNullException(nameof(async));
+        public void Set(Func<Awaitable> async) => storedAction = async ?? throw new ArgumentNullException(nameof(async));
 
         /// <summary>
-        /// Tries to invoke the synchronous action. Returns true if executed.
+        /// Tries to invoke the stored synchronous action. Returns true if executed.
         /// </summary>
         public bool TryInvoke()
         {
-            if (triggered || action is not Action a) return false;
+            if (triggered || storedAction is not Action a) return false;
             a();
             triggered = true;
             return true;
         }
 
         /// <summary>
-        /// Tries to invoke the asynchronous action. Returns true if executed.
+        /// Tries to invoke the given synchronous action once. Returns true if executed.
+        /// </summary>
+        public bool TryInvoke(Action action)
+        {
+            if (triggered || action == null) return false;
+            action();
+            triggered = true;
+            return true;
+        }
+
+        /// <summary>
+        /// Tries to invoke the stored asynchronous action. Returns true if executed.
         /// </summary>
         public async Awaitable<bool> TryInvokeAsync()
         {
-            if (triggered || action is not Func<Awaitable> a) return false;
+            if (triggered || storedAction is not Func<Awaitable> a) return false;
             await a();
+            triggered = true;
+            return true;
+        }
+
+        /// <summary>
+        /// Tries to invoke the given asynchronous action once. Returns true if executed.
+        /// </summary>
+        public async Awaitable<bool> TryInvokeAsync(Func<Awaitable> action)
+        {
+            if (triggered || action == null) return false;
+            await action();
             triggered = true;
             return true;
         }
@@ -58,6 +73,6 @@ namespace JamalArouna.Utilities
         /// <summary>
         /// Resets the trigger state so the action can run again.
         /// </summary>
-        public void Reset() => triggered = false;
+        public void Clear() => triggered = false;
     }
 }
