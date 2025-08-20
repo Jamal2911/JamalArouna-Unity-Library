@@ -366,7 +366,18 @@ namespace JamalArouna.Utilities
                 Mathf.Clamp01((time - rangeMin) / (rangeMax - rangeMin));
         }
         
-        public static float GetRandomBetween(this Vector2 vector) =>  UnityEngine.Random.Range(vector.x, vector.y);
-        public static float GetRandomBetweenInt(this Vector2Int vector) =>  UnityEngine.Random.Range(vector.x, vector.y);
+        /// <summary>
+        /// Returns a random float value between the x and y components of the given Vector2.
+        /// </summary>
+        /// <param name="vector">The Vector2 containing the min (x) and max (y) values.</param>
+        /// <returns>A random float between vector.x and vector.y.</returns>
+        public static float GetRandomBetween(this Vector2 vector) => UnityEngine.Random.Range(vector.x, vector.y);
+
+        /// <summary>
+        /// Returns a random integer value between the x and y components of the given Vector2Int.
+        /// </summary>
+        /// <param name="vector">The Vector2Int containing the min (x) and max (y) values.</param>
+        /// <returns>A random integer between vector.x (inclusive) and vector.y (exclusive).</returns>
+        public static float GetRandomBetweenInt(this Vector2Int vector) => UnityEngine.Random.Range(vector.x, vector.y);
     }
 }
