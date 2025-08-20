@@ -365,6 +365,8 @@ namespace JamalArouna.Utilities
             return rangeMax == rangeMin ? 0f : // Avoid division by zero
                 Mathf.Clamp01((time - rangeMin) / (rangeMax - rangeMin));
         }
-
+        
+        public static float GetRandomBetween(this Vector2 vector) =>  UnityEngine.Random.Range(vector.x, vector.y);
+        public static float GetRandomBetweenInt(this Vector2Int vector) =>  UnityEngine.Random.Range(vector.x, vector.y);
     }
 }
