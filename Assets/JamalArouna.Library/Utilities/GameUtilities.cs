@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JamalArouna.Utilities.Components;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 #if DOTWEEN
 using DG.Tweening;
@@ -379,5 +380,48 @@ namespace JamalArouna.Utilities
         /// <param name="vector">The Vector2Int containing the min (x) and max (y) values.</param>
         /// <returns>A random integer between vector.x (inclusive) and vector.y (exclusive).</returns>
         public static float GetRandomBetweenInt(this Vector2Int vector) => UnityEngine.Random.Range(vector.x, vector.y);
+
+        #region Vector Extensions
+        
+        /// <summary>
+        /// Returns a copy of the vector with its Y component set to 0. 
+        /// Keeps the X and Z components unchanged.
+        /// </summary>
+        public static Vector3 FlatXZ(this Vector3 vector) => new (vector.x, 0f, vector.z);
+
+        /// <summary>
+        /// Converts the Vector3 into a Vector2 using its X and Z components. 
+        /// The Y component is ignored.
+        /// </summary>
+        public static Vector2 ToVector2XZ(this Vector3 vector) => new (vector.x, vector.z);
+
+        /// <summary>
+        /// Returns a vector containing only the Y component. 
+        /// The X and Z components are set to 0.
+        /// </summary>
+        public static Vector3 OnlyY(this Vector3 vector) => new (0f, vector.y, 0f);
+
+        /// <summary>
+        /// Returns a copy of the vector with its Y component replaced by the given value.
+        /// </summary>
+        /// <param name="y">The new Y component.</param>
+        public static Vector3 WithY(this Vector3 vector, float y) => new (vector.x, y, vector.z);
+
+        /// <summary>
+        /// Returns a copy of the vector with a random offset applied within the given radius.
+        /// Optionally includes variation on the Y axis.
+        /// </summary>
+        /// <param name="radius">The maximum offset distance on each axis.</param>
+        /// <param name="includeY">If true, also applies a random offset to the Y axis.</param>
+        public static Vector3 WithRandomOffset(this Vector3 vector, float radius, bool includeY = false)
+        {
+            return vector + new Vector3(
+                Random.Range(-radius, radius),
+                includeY ? Random.Range(-radius, radius) : 0f,
+                Random.Range(-radius, radius)
+            );
+        }
+        
+        #endregion
     }
 }
