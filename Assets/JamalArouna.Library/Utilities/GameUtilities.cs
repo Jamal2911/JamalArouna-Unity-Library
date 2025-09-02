@@ -380,6 +380,26 @@ namespace JamalArouna.Utilities
         /// <param name="vector">The Vector2Int containing the min (x) and max (y) values.</param>
         /// <returns>A random integer between vector.x (inclusive) and vector.y (exclusive).</returns>
         public static float GetRandomBetweenInt(this Vector2Int vector) => UnityEngine.Random.Range(vector.x, vector.y);
+        
+        /// <summary>
+        /// Sets the value of <paramref name="obj"/> to <paramref name="newObj"/> 
+        /// only if they are different.
+        /// </summary>
+        /// <typeparam name="T">The type of the value.</typeparam>
+        /// <param name="obj">The variable to update, passed by reference.</param>
+        /// <param name="newObj">The new value to assign if different.</param>
+        /// <returns>
+        /// True if the value was changed; otherwise, false.
+        /// </returns>
+        public static bool SetIfDifferent<T>(ref T obj, T newObj)
+        {
+            if (!EqualityComparer<T>.Default.Equals(obj, newObj))
+            {
+                obj = newObj;
+                return true;
+            }
+            return false;
+        }
 
         #region Vector Extensions
         
