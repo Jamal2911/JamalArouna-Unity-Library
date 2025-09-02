@@ -472,25 +472,40 @@ namespace JamalArouna.Utilities
         public static Vector3 Multiply(this Vector3 a, Vector3 b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
         
         /// <summary>
-        /// Clamps each component of the vector between the corresponding min and max values,
+        /// Clamps each component of the vector between the same min and max values,
         /// optionally using a mask to determine which axes are affected.
+        /// </summary>
+        /// <param name="vector">The vector to clamp.</param>
+        /// <param name="min">Minimum value for all axes.</param>
+        /// <param name="max">Maximum value for all axes.</param>
+        /// <param name="mask">
+        /// Mask that determines which components are clamped. 
+        /// True = clamp this axis, False = leave unchanged.
+        /// </param>
+        /// <returns>A new Vector3 with components clamped according to the mask.</returns>
+        public static Vector3 Clamp(this Vector3 vector, float min, float max, Vector3Mask mask)
+        {
+            float x = mask.x ? Mathf.Clamp(vector.x, min, max) : vector.x;
+            float y = mask.y ? Mathf.Clamp(vector.y, min, max) : vector.y;
+            float z = mask.z ? Mathf.Clamp(vector.z, min, max) : vector.z;
+            return new Vector3(x, y, z);
+        }
+
+        /// <summary>
+        /// Clamps each component of the vector between the corresponding min and max values per axis.
         /// </summary>
         /// <param name="vector">The vector to clamp.</param>
         /// <param name="min">Minimum values per axis.</param>
         /// <param name="max">Maximum values per axis.</param>
-        /// <param name="mask">
-        /// Mask that determines which components are clamped.
-        /// True = clamp this axis, False = leave unchanged.
-        /// </param>
-        /// <returns>A new Vector3 with components clamped according to the mask.</returns>
-        public static Vector3 Clamp(this Vector3 vector, Vector3 min, Vector3 max, Vector3Mask mask)
+        /// <returns>A new Vector3 with all components clamped between the specified min and max values.</returns>
+        public static Vector3 Clamp(this Vector3 vector, Vector3 min, Vector3 max)
         {
-            float x = mask.x ? Mathf.Clamp(vector.x, min.x, max.x) : vector.x;
-            float y = mask.y ? Mathf.Clamp(vector.y, min.y, max.y) : vector.y;
-            float z = mask.z ? Mathf.Clamp(vector.z, min.z, max.z) : vector.z;
+            float x = Mathf.Clamp(vector.x, min.x, max.x);
+            float y = Mathf.Clamp(vector.y, min.y, max.y);
+            float z = Mathf.Clamp(vector.z, min.z, max.z);
             return new Vector3(x, y, z);
         }
-
+        
         #endregion
     }
 }
