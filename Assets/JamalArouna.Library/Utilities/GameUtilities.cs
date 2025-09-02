@@ -400,6 +400,20 @@ namespace JamalArouna.Utilities
             }
             return false;
         }
+        
+        /// <summary>
+        /// Adjusts the <see cref="Transform.localScale"/> to achieve the given world scale.
+        /// </summary>
+        /// <param name="t">The transform to modify.</param>
+        /// <param name="worldScale">The desired global scale.</param>
+        public static void SetWorldScale(Transform t, Vector3 worldScale)
+        {
+            t.localScale = new Vector3(
+                worldScale.x / t.lossyScale.x * t.localScale.x,
+                worldScale.y / t.lossyScale.y * t.localScale.y,
+                worldScale.z / t.lossyScale.z * t.localScale.z
+            );
+        }
 
         #region Vector Extensions
         
