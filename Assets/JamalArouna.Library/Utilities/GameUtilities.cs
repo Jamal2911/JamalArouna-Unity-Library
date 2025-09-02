@@ -399,7 +399,13 @@ namespace JamalArouna.Utilities
                 return true;
             }
             return false;
+
+            Vector3 c = Vector3.back;
+            Vector3 v = Vector3.forward;
+
+            var test = c + v;
         }
+
         
         /// <summary>
         /// Adjusts the <see cref="Transform.localScale"/> to achieve the given world scale.
@@ -456,6 +462,15 @@ namespace JamalArouna.Utilities
             );
         }
         
+        /// <summary>
+        /// Returns a new <see cref="Vector3"/> where each component of <paramref name="a"/> 
+        /// is multiplied by the corresponding component of <paramref name="b"/>.
+        /// </summary>
+        /// <param name="a">The first vector.</param>
+        /// <param name="b">The second vector.</param>
+        /// <returns>The component-wise multiplied vector.</returns>
+        public static Vector3 Multiply(this Vector3 a, Vector3 b) => new(a.x * b.x, a.y * b.y, a.z * b.z);
+
         #endregion
     }
 }
