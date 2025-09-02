@@ -433,7 +433,7 @@ namespace JamalArouna.Utilities
         /// </summary>
         /// <param name="radius">The maximum offset distance on each axis.</param>
         /// <param name="includeY">If true, also applies a random offset to the Y axis.</param>
-        public static Vector3 WithRandomOffset(this Vector3 vector, float radius, bool includeY = false)
+        public static Vector3 WithRandomOffset(this Vector3 vector, float radius, bool includeY = true)
         {
             return vector + new Vector3(
                 Random.Range(-radius, radius),
