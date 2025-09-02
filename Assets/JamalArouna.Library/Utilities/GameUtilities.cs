@@ -415,7 +415,7 @@ namespace JamalArouna.Utilities
         public static void SetWorldScale(Transform t, Vector3 worldScale)
         {
             Vector3 lossy = t.lossyScale;
-            float minValue = 0.0001f;
+            float minValue = 0.000001f;
             
             t.localScale = new Vector3(
                 Mathf.Max(worldScale.x / lossy.x * t.localScale.x, minValue),
