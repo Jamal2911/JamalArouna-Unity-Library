@@ -52,6 +52,16 @@ namespace JamalArouna.Utilities
                 else z = value;
             }
         }
+        
+        /// <summary>
+        /// Inverts this mask in place, changing true to false and false to true for each axis.
+        /// </summary>
+        public void Invert()
+        {
+            x = !x;
+            y = !y;
+            z = !z;
+        }
 
         /// <summary>
         /// A mask where all axes are true.
@@ -62,6 +72,37 @@ namespace JamalArouna.Utilities
         /// A mask where all axes are false.
         /// </summary>
         public static readonly Vector3Mask None = new Vector3Mask(false, false, false);
+
+        /// <summary>
+        /// A mask affecting only the X axis.
+        /// </summary>
+        public static readonly Vector3Mask X = new Vector3Mask(true, false, false);
+
+        /// <summary>
+        /// A mask affecting only the Y axis.
+        /// </summary>
+        public static readonly Vector3Mask Y = new Vector3Mask(false, true, false);
+
+        /// <summary>
+        /// A mask affecting only the Z axis.
+        /// </summary>
+        public static readonly Vector3Mask Z = new Vector3Mask(false, false, true);
+
+        /// <summary>
+        /// A mask affecting the X and Y axes.
+        /// </summary>
+        public static readonly Vector3Mask XY = new Vector3Mask(true, true, false);
+
+        /// <summary>
+        /// A mask affecting the X and Z axes.
+        /// </summary>
+        public static readonly Vector3Mask XZ = new Vector3Mask(true, false, true);
+
+        /// <summary>
+        /// A mask affecting the Y and Z axes.
+        /// </summary>
+        public static readonly Vector3Mask YZ = new Vector3Mask(false, true, true);
+
 
         /// <summary>
         /// Converts the mask to a Vector3, using 1.0 for true and 0.0 for false.
