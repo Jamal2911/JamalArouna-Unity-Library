@@ -414,10 +414,13 @@ namespace JamalArouna.Utilities
         /// <param name="worldScale">The desired global scale.</param>
         public static void SetWorldScale(Transform t, Vector3 worldScale)
         {
+            Vector3 lossy = t.lossyScale;
+            float minValue = 0.0001f; // minimaler Wert, um Division durch 0 zu vermeiden
+
             t.localScale = new Vector3(
-                worldScale.x / t.lossyScale.x * t.localScale.x,
-                worldScale.y / t.lossyScale.y * t.localScale.y,
-                worldScale.z / t.lossyScale.z * t.localScale.z
+                worldScale.x / Mathf.Max(lossy.x, minValue) * t.localScale.x,
+                worldScale.y / Mathf.Max(lossy.y, minValue) * t.localScale.y,
+                worldScale.z / Mathf.Max(lossy.z, minValue) * t.localScale.z
             );
         }
 
