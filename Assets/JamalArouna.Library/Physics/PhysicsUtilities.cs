@@ -108,7 +108,7 @@ namespace JamalArouna.Physics
             this Rigidbody rb,
             ref Vector3 lastVelocity,
             float maxDelta,
-            VelocityDeltaExceededHandler onDeltaExceeded,
+            Action onDeltaExceeded,
             bool ignoreY = false
         )
         {
@@ -119,7 +119,7 @@ namespace JamalArouna.Physics
                 velocityDelta.y = 0f;
 
             if (velocityDelta.magnitude > maxDelta)
-                onDeltaExceeded?.Invoke(velocityDelta, currentVelocity, lastVelocity);
+                onDeltaExceeded?.Invoke();
             
             lastVelocity = currentVelocity;
         }
