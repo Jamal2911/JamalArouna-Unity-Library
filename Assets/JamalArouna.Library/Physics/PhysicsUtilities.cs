@@ -97,23 +97,35 @@ namespace JamalArouna.Physics
 
             return false;
         }
-        
-        public delegate void VelocityDeltaExceededHandler(
-            Vector3 velocityDelta,
-            Vector3 currentVelocity,
-            Vector3 lastVelocity
-        );
 
+        /// <summary>
+        /// Checks whether the change in velocity of a <see cref="Rigidbody"/> since the last frame
+        /// exceeds a specified threshold.
+        /// </summary>
+        /// <param name="rb">The <see cref="Rigidbody"/> whose velocity should be checked.</param>
+        /// <param name="lastValue">
+        /// A reference to the last recorded velocity. 
+        /// This will be updated with the current velocity after the check.
+        /// </param>
+        /// <param name="maxDelta">The maximum allowed magnitude of the velocity delta.</param>
+        /// <param name="onDeltaExceeded">
+        /// Callback invoked when the velocity delta exceeds <paramref name="maxDelta"/>.
+        /// The callback receives the magnitude of the velocity delta.
+        /// </param>
+        /// <param name="ignoreY">
+        /// If true, the Y component of the velocity delta will be ignored 
+        /// (useful for horizontal-only checks).
+        /// </param>
         public static void CheckVelocityDelta(
             this Rigidbody rb,
-            ref Vector3 lastVelocity,
+            ref Vector3 lastValue,
             float maxDelta,
             Action<float> onDeltaExceeded,
             bool ignoreY = false
         )
         {
             Vector3 currentVelocity = rb.linearVelocity;
-            Vector3 velocityDelta = currentVelocity - lastVelocity;
+            Vector3 velocityDelta = currentVelocity - lastValue;
 
             if (ignoreY)
                 velocityDelta.y = 0f;
@@ -121,8 +133,7 @@ namespace JamalArouna.Physics
             if (velocityDelta.magnitude > maxDelta)
                 onDeltaExceeded?.Invoke(velocityDelta.magnitude);
             
-            lastVelocity = currentVelocity;
+            lastValue = currentVelocity;
         }
-
     }
 }

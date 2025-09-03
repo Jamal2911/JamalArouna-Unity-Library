@@ -526,6 +526,35 @@ namespace JamalArouna.Utilities
             return new Vector3(x, y, z);
         }
         
+        /// <summary>
+        /// Checks whether the change between the current <see cref="Vector3"/> value and the last recorded value
+        /// exceeds a specified threshold.
+        /// </summary>
+        /// <param name="vector">The current <see cref="Vector3"/> value to check.</param>
+        /// <param name="lastValue">
+        /// A reference to the last recorded <see cref="Vector3"/> value. 
+        /// This will be updated to the current value after the check.
+        /// </param>
+        /// <param name="maxDelta">The maximum allowed magnitude of the change (delta).</param>
+        /// <param name="onDeltaExceeded">
+        /// Callback that will be invoked with the delta magnitude if the threshold is exceeded.
+        /// </param>
+        public static void CheckDelta(
+            this Vector3 vector,
+            ref Vector3 lastValue,
+            float maxDelta,
+            Action<float> onDeltaExceeded
+        )
+        {
+            Vector3 currentVector = vector;
+            Vector3 delta = currentVector - lastValue;
+
+            if (delta.magnitude > maxDelta)
+                onDeltaExceeded?.Invoke(delta.magnitude);
+            
+            lastValue = currentVector;
+        }
+        
         #endregion
     }
 }
