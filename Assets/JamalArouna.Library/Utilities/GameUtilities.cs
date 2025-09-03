@@ -391,19 +391,29 @@ namespace JamalArouna.Utilities
         /// <returns>
         /// True if the value was changed; otherwise, false.
         /// </returns>
-        public static bool SetIfDifferent<T>(ref T obj, T newObj)
+        public static bool SetObjectIfDifferent<T>(ref T obj, T newObj) { ... }
+
+        /// <summary>
+        /// Sets a property to <paramref name="newValue"/> only if its current value 
+        /// (<paramref name="current"/>) is different.
+        /// </summary>
+        /// <typeparam name="T">The type of the value.</typeparam>
+        /// <param name="current">The current value of the property.</param>
+        /// <param name="newValue">The new value to assign if different.</param>
+        /// <param name="setter">
+        /// An <see cref="Action{T}"/> delegate that assigns the new value to the property.
+        /// </param>
+        /// <returns>
+        /// True if the property was changed; otherwise, false.
+        /// </returns>
+        public static bool SetPropertyIfDifferent<T>(T current, T newValue, Action<T> setter)
         {
-            if (!EqualityComparer<T>.Default.Equals(obj, newObj))
+            if (!EqualityComparer<T>.Default.Equals(current, newValue))
             {
-                obj = newObj;
+                setter(newValue);
                 return true;
             }
             return false;
-
-            Vector3 c = Vector3.back;
-            Vector3 v = Vector3.forward;
-
-            var test = c + v;
         }
 
         
