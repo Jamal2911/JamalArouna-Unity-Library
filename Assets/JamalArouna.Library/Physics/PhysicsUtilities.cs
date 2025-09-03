@@ -97,6 +97,32 @@ namespace JamalArouna.Physics
 
             return false;
         }
+        
+        public delegate void VelocityDeltaExceededHandler(
+            Vector3 velocityDelta,
+            Vector3 currentVelocity,
+            Vector3 lastVelocity
+        );
+
+        public static void CheckVelocityDelta(
+            this Rigidbody rb,
+            ref Vector3 lastVelocity,
+            float maxDelta,
+            VelocityDeltaExceededHandler onDeltaExceeded,
+            bool ignoreY = false
+        )
+        {
+            Vector3 currentVelocity = rb.linearVelocity;
+            Vector3 velocityDelta = currentVelocity - lastVelocity;
+
+            if (ignoreY)
+                velocityDelta.y = 0f;
+
+            if (velocityDelta.magnitude > maxDelta)
+                onDeltaExceeded?.Invoke(velocityDelta, currentVelocity, lastVelocity);
+            
+            lastVelocity = currentVelocity;
+        }
 
     }
 }
