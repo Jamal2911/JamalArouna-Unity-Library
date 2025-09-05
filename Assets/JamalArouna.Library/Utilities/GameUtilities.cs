@@ -416,6 +416,11 @@ namespace JamalArouna.Utilities
             return false;
         }
         
+        /// <summary>
+        /// Converts a local-space offset to a world-space position relative to the specified origin.
+        /// </summary>
+        public static Vector3 GetWorldPointFromLocalOffset(Vector3 localOffset, Transform origin) => origin.TransformPoint(localOffset);
+        
         #endregion
         
         /// <summary>
