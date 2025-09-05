@@ -217,15 +217,36 @@ namespace JamalArouna.Utilities
         /// <see langword="true"/> if <paramref name="field"/> was null and got assigned;
         /// otherwise, <see langword="false"/>.
         /// </returns>
-        /// <remarks>
-        /// When <typeparamref name="T"/> derives from <see cref="UnityEngine.Object"/>,
-        /// this method respects Unity's custom null semantics for destroyed objects.
-        /// </remarks>
         public static bool SetIfNull<T>(ref T field, T newValue) where T : class
         {
             if (IsNull(field))
             {
                 field = newValue;
+                return true;
+            }
+            return false;
+        }
+        
+        /// <summary>
+        /// Sets <paramref name="field"/> using the provided <paramref name="factory"/> 
+        /// if the current value is null (including Unity's "fake null").
+        /// Returns <see langword="true"/> if the assignment occurred.
+        /// </summary>
+        /// <typeparam name="T">Reference type of the field.</typeparam>
+        /// <param name="field">Reference to the field to check and potentially assign.</param>
+        /// <param name="factory">
+        /// A function that creates the value to assign when the field is null.
+        /// If <paramref name="factory"/> is <see langword="null"/>, the field will be set to <see langword="null"/>.
+        /// </param>
+        /// <returns>
+        /// <see langword="true"/> if <paramref name="field"/> was null and got assigned;
+        /// otherwise, <see langword="false"/>.
+        /// </returns>
+        public static bool SetIfNull<T>(ref T field, Func<T> factory) where T : class
+        {
+            if (IsNull(field))
+            {
+                field = factory != null ? factory() : null;
                 return true;
             }
             return false;
