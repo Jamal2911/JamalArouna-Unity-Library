@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using JamalArouna.Utilities.Components;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -204,6 +205,49 @@ namespace JamalArouna.Utilities
             if (angle > 180f) angle -= 360f;
             return angle;
         }
+        
+        /// <summary>
+        /// Sets <paramref name="field"/> to <paramref name="newValue"/> if it is null
+        /// (including Unity's "fake null"). Returns <see langword="true"/> if the assignment occurred.
+        /// </summary>
+        /// <typeparam name="T">Reference type of the field.</typeparam>
+        /// <param name="field">Reference to the field to check and potentially assign.</param>
+        /// <param name="newValue">Value to assign when the field is null.</param>
+        /// <returns>
+        /// <see langword="true"/> if <paramref name="field"/> was null and got assigned;
+        /// otherwise, <see langword="false"/>.
+        /// </returns>
+        /// <remarks>
+        /// When <typeparamref name="T"/> derives from <see cref="UnityEngine.Object"/>,
+        /// this method respects Unity's custom null semantics for destroyed objects.
+        /// </remarks>
+        public static bool SetIfNull<T>(ref T field, T newValue) where T : class
+        {
+            if (IsNull(field))
+            {
+                field = newValue;
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the given reference is effectively null, correctly handling
+        /// Unity's custom null semantics for destroyed <see cref="UnityEngine.Object"/> instances.
+        /// </summary>
+        /// <typeparam name="T">Reference type.</typeparam>
+        /// <param name="obj">The object reference to test.</param>
+        /// <returns>
+        /// <see langword="true"/> if <paramref name="obj"/> is null or a destroyed Unity object;
+        /// otherwise, <see langword="false"/>.
+        /// </returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static bool IsNull<T>(T obj) where T : class
+        {
+            if (obj is UnityEngine.Object uo) return uo == null;
+            return obj is null;
+        }
+
 
         #region DOTween Extensions
         #if DOTWEEN
@@ -422,7 +466,6 @@ namespace JamalArouna.Utilities
             }
             return false;
         }
-
         
         /// <summary>
         /// Adjusts the <see cref="Transform.localScale"/> to achieve the given world scale.
@@ -479,6 +522,21 @@ namespace JamalArouna.Utilities
                 Random.Range(-radius, radius),
                 includeY ? Random.Range(-radius, radius) : 0f,
                 Random.Range(-radius, radius)
+            );
+        }
+        
+        /// <summary>
+        /// Returns a copy of the vector with a random offset applied within the given radius.
+        /// Optionally includes variation on the Y axis.
+        /// </summary>
+        /// <param name="radiusVector">The maximum offset distance on each axis.</param>
+        /// <param name="includeY">If true, also applies a random offset to the Y axis.</param>
+        public static Vector3 WithRandomOffset(this Vector3 vector, Vector3 radiusVector, bool includeY = true)
+        {
+            return vector + new Vector3(
+                Random.Range(-vector.x, vector.x),
+                includeY ? Random.Range(-vector.y, vector.y) : 0f,
+                Random.Range(-vector.z, vector.z)
             );
         }
         
