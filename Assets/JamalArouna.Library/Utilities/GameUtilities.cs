@@ -301,16 +301,19 @@ namespace JamalArouna.Utilities
         /// <returns>Bounds - included Children</returns>
         public static Bounds GetObjectBounds(this GameObject gameObject)
         {
-            Renderer[] renderers = gameObject.GetComponentsInChildren<Renderer>();
-            if (renderers.Length > 0)
-            {
-                Bounds bounds = renderers[0].bounds;
-                for (int j = 1; j < renderers.Length; ++j)
-                    bounds.Encapsulate(renderers[j].bounds);
-                return bounds;
-            }
+            var renderers = gameObject
+                .GetComponentsInChildren<Renderer>()
+                .Where(r => !(r is ParticleSystemRenderer))
+                .ToArray();
 
-            return new Bounds(gameObject.transform.position, Vector3.zero);
+            if (renderers.Length == 0)
+                return new Bounds(gameObject.transform.position, Vector3.zero);
+
+            Bounds bounds = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++)
+                bounds.Encapsulate(renderers[i].bounds);
+
+            return bounds;
         }
 
         /// <summary>
