@@ -296,85 +296,85 @@ namespace JamalArouna.Utilities
         #region Transform, GameObject
         
         /// <summary>
-    /// Returns the Renderer Bounds of the GameObject. Can include all Children.
-    /// </summary>
-    /// <param name="gameObject">Target GameObject</param>
-    /// <param name="includeChildren">Include all children in calculation</param>
-    /// <returns>Renderer Bounds</returns>
-    public static Bounds GetRendererBounds(this GameObject gameObject, bool includeChildren = true)
-    {
-        var renderers = includeChildren
-            ? gameObject.GetComponentsInChildren<Renderer>().Where(r => !(r is ParticleSystemRenderer)).ToArray()
-            : gameObject.GetComponents<Renderer>().Where(r => !(r is ParticleSystemRenderer)).ToArray();
-
-        if (renderers.Length == 0)
-            return new Bounds(gameObject.transform.position, Vector3.zero);
-
-        Bounds bounds = renderers[0].bounds;
-        for (int i = 1; i < renderers.Length; i++)
-            bounds.Encapsulate(renderers[i].bounds);
-
-        return bounds;
-    }
-
-    /// <summary>
-    /// Returns the Mesh Bounds of the GameObject. Can include all Children.
-    /// Needed the Read/Write Option in the Mesh Import Settings to be enabled.
-    /// </summary>
-    /// <param name="gameObject">Target GameObject</param>
-    /// <param name="includeChildren">Include all children in calculation</param>
-    /// <returns>Mesh Bounds</returns>
-    public static Bounds GetMeshBounds(this GameObject gameObject, bool includeChildren = true)
-    {
-        var meshFilters = includeChildren
-            ? gameObject.GetComponentsInChildren<MeshFilter>()
-            : gameObject.GetComponents<MeshFilter>();
-
-        if (meshFilters.Length == 0)
-            return new Bounds(gameObject.transform.position, Vector3.zero);
-
-        bool hasBounds = false;
-        Bounds bounds = new Bounds();
-
-        foreach (var mf in meshFilters)
+        /// Returns the Renderer Bounds of the GameObject. Can include all Children.
+        /// </summary>
+        /// <param name="gameObject">Target GameObject</param>
+        /// <param name="includeChildren">Include all children in calculation</param>
+        /// <returns>Renderer Bounds</returns>
+        public static Bounds GetRendererBounds(this GameObject gameObject, bool includeChildren = true)
         {
-            if (mf.sharedMesh == null)
-                continue;
+            var renderers = includeChildren
+                ? gameObject.GetComponentsInChildren<Renderer>().Where(r => !(r is ParticleSystemRenderer)).ToArray()
+                : gameObject.GetComponents<Renderer>().Where(r => !(r is ParticleSystemRenderer)).ToArray();
 
-            Vector3[] vertices = null;
-            try
-            {
-                vertices = mf.sharedMesh.vertices; // kann Exception werfen
-            }
-            catch (UnityException)
-            {
-                Debug.LogWarning(
-                    $"[GetMeshBounds] Mesh '{mf.sharedMesh.name}' auf '{mf.gameObject.name}' ist nicht lesbar (Read/Write deaktiviert)."
-                );
-                continue;
-            }
+            if (renderers.Length == 0)
+                return new Bounds(gameObject.transform.position, Vector3.zero);
 
-            if (vertices == null || vertices.Length == 0)
-                continue;
+            Bounds bounds = renderers[0].bounds;
+            for (int i = 1; i < renderers.Length; i++)
+                bounds.Encapsulate(renderers[i].bounds);
 
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                Vector3 worldPos = mf.transform.TransformPoint(vertices[i]);
-
-                if (!hasBounds)
-                {
-                    bounds = new Bounds(worldPos, Vector3.zero);
-                    hasBounds = true;
-                }
-                else
-                {
-                    bounds.Encapsulate(worldPos);
-                }
-            }
+            return bounds;
         }
 
-        return bounds;
-    }
+        /// <summary>
+        /// Returns the Mesh Bounds of the GameObject. Can include all Children.
+        /// Needed the Read/Write Option in the Mesh Import Settings to be enabled.
+        /// </summary>
+        /// <param name="gameObject">Target GameObject</param>
+        /// <param name="includeChildren">Include all children in calculation</param>
+        /// <returns>Mesh Bounds</returns>
+        public static Bounds GetMeshBounds(this GameObject gameObject, bool includeChildren = true)
+        {
+            var meshFilters = includeChildren
+                ? gameObject.GetComponentsInChildren<MeshFilter>()
+                : gameObject.GetComponents<MeshFilter>();
+
+            if (meshFilters.Length == 0)
+                return new Bounds(gameObject.transform.position, Vector3.zero);
+
+            bool hasBounds = false;
+            Bounds bounds = new Bounds();
+
+            foreach (var mf in meshFilters)
+            {
+                if (mf.sharedMesh == null)
+                    continue;
+
+                Vector3[] vertices = null;
+                try
+                {
+                    vertices = mf.sharedMesh.vertices;
+                }
+                catch (UnityException)
+                {
+                    Debug.LogWarning(
+                        $"[GetMeshBounds] Mesh '{mf.sharedMesh.name}' auf '{mf.gameObject.name}' ist nicht lesbar (Read/Write deaktiviert)."
+                    );
+                    continue;
+                }
+
+                if (vertices == null || vertices.Length == 0)
+                    continue;
+
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    Vector3 worldPos = mf.transform.TransformPoint(vertices[i]);
+
+                    if (!hasBounds)
+                    {
+                        bounds = new Bounds(worldPos, Vector3.zero);
+                        hasBounds = true;
+                    }
+                    else
+                    {
+                        bounds.Encapsulate(worldPos);
+                    }
+                }
+            }
+
+            return bounds;
+        }
 
         /// <summary>
         /// Removes all Children in this transform
