@@ -315,6 +315,48 @@ namespace JamalArouna.Utilities
 
             return bounds;
         }
+        
+        /// <summary>
+        /// Returns the Mesh Bounds of the GameObject included all Children
+        /// </summary>
+        /// <returns>Mesh Bounds - included Children</returns>
+        public static Bounds GetMeshBounds(this GameObject gameObject)
+        {
+            var meshFilters = gameObject.GetComponentsInChildren<MeshFilter>();
+
+            if (meshFilters.Length == 0)
+                return new Bounds(gameObject.transform.position, Vector3.zero);
+
+            bool hasBounds = false;
+            Bounds bounds = new Bounds();
+
+            foreach (var mf in meshFilters)
+            {
+                if (mf.sharedMesh == null) 
+                    continue;
+
+                var vertices = mf.sharedMesh.vertices;
+                if (vertices == null || vertices.Length == 0)
+                    continue;
+                
+                for (int i = 0; i < vertices.Length; i++)
+                {
+                    Vector3 worldPos = mf.transform.TransformPoint(vertices[i]);
+
+                    if (!hasBounds)
+                    {
+                        bounds = new Bounds(worldPos, Vector3.zero);
+                        hasBounds = true;
+                    }
+                    else
+                    {
+                        bounds.Encapsulate(worldPos);
+                    }
+                }
+            }
+
+            return bounds;
+        }
 
         /// <summary>
         /// Removes all Children in this transform
