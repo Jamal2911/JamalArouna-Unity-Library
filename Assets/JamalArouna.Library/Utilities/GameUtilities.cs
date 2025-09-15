@@ -342,15 +342,14 @@ namespace JamalArouna.Utilities
                     continue;
 
                 Vector3[] vertices = null;
-                try
+                
+                if(mf.sharedMesh.isReadable)
                 {
                     vertices = mf.sharedMesh.vertices;
                 }
-                catch (UnityException)
+                else
                 {
-                    Debug.LogWarning(
-                        $"[GetMeshBounds] Mesh '{mf.sharedMesh.name}' auf '{mf.gameObject.name}' ist nicht lesbar (Read/Write deaktiviert)."
-                    );
+                    Debug.LogWarning($"[GetMeshBounds] Mesh '{mf.sharedMesh.name}' on '{mf.gameObject.name}' is not readable (Read/Write is deactivated)." );
                     continue;
                 }
 
