@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using JamalArouna.Utilities.Components;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -702,5 +704,50 @@ namespace JamalArouna.Utilities
         }
         
         #endregion
+    }
+
+    public static class StringHelper
+    {
+        /// <summary>
+        /// Splits a camel case string into separate words by inserting spaces before uppercase letters.
+        /// </summary>
+        /// <param name="input">The camel case string.</param>
+        /// <returns>A string with spaces between words.</returns>
+        public static string SplitCamelCase(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            return Regex.Replace(input, "(?<!^)([A-Z])", " $1");
+        }
+
+        /// <summary>
+        /// Splits a camel case string into separate words and capitalizes the first letter of each word.
+        /// </summary>
+        /// <param name="input">The camel case string.</param>
+        /// <returns>A formatted string with spaces and capitalized words.</returns>
+        public static string SplitAndCapitalizeCamelCase(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            string withSpaces = Regex.Replace(input, "(?<!^)([A-Z])", " $1");
+
+            TextInfo textInfo = CultureInfo.InvariantCulture.TextInfo;
+            return textInfo.ToTitleCase(withSpaces.ToLower());
+        }
+
+        /// <summary>
+        /// Capitalizes the first character of the string and leaves the rest unchanged.
+        /// </summary>
+        /// <param name="input">The input string.</param>
+        /// <returns>The string with its first character capitalized.</returns>
+        public static string Capitalize(this string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            return char.ToUpper(input[0]) + input.Substring(1);
+        }
     }
 }
