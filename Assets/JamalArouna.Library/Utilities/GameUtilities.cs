@@ -376,6 +376,28 @@ namespace JamalArouna.Utilities
 
             return bounds;
         }
+        
+        /// <summary>
+        /// Returns the Collider Bounds of the GameObject. Can include all Children.
+        /// </summary>
+        /// <param name="gameObject">Target GameObject</param>
+        /// <param name="includeChildren">Include all children in calculation</param>
+        /// <returns>Collider Bounds</returns>
+        public static Bounds GetColliderBounds(this GameObject gameObject, bool includeChildren = true)
+        {
+            var colliders = includeChildren
+                ? gameObject.GetComponentsInChildren<Collider>()
+                : gameObject.GetComponents<Collider>();
+
+            if (colliders.Length == 0)
+                return new Bounds(gameObject.transform.position, Vector3.zero);
+
+            Bounds bounds = colliders[0].bounds;
+            for (int i = 1; i < colliders.Length; i++)
+                bounds.Encapsulate(colliders[i].bounds);
+
+            return bounds;
+        }
 
         /// <summary>
         /// Removes all Children in this transform
