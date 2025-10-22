@@ -5,6 +5,9 @@ using UnityEngine;
 
 namespace JamalArouna.Utilities
 {
+
+//muss in den editor Folder !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
     /// <summary>
     /// Provides editor utilities for creating and managing pivot GameObjects in the Unity hierarchy.
     /// </summary>

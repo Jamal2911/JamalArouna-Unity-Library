@@ -274,22 +274,22 @@ namespace JamalArouna.Utilities
 
         #region DOTween Extensions
         #if DOTWEEN
-        public static void KillIfActive(this Tween tween)
+        public static void KillIfActive(this Tween tween, bool completeTween = true)
         {
             if (tween != null && tween.IsActive()) 
-                tween.Kill(true); // also completes the tween 
+                tween.Kill(completeTween); // also completes the tween 
         }
         
-        public static void KillIfActive(this Sequence sequence)
+        public static void KillIfActive(this Sequence sequence, bool completeSequence = true)
         {
             if (sequence != null && sequence.IsActive()) 
-                sequence.Kill(true); // also completes the sequence 
+                sequence.Kill(completeSequence); // also completes the sequence 
         }
         
-        public static void KillAndSetGetNewSequence(ref Sequence sequence)
+        public static void KillAndSetGetNewSequence(ref Sequence sequence, bool completeSequence = true)
         {
             if (sequence != null && sequence.IsActive()) 
-                sequence.Kill(true); // also completes the sequence 
+                sequence.Kill(completeSequence); // also completes the sequence 
             sequence = DOTween.Sequence();
         }
         #endif
