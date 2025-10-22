@@ -286,7 +286,7 @@ namespace JamalArouna.Utilities
                 sequence.Kill(completeSequence); // also completes the sequence 
         }
         
-        public static void KillAndSetGetNewSequence(ref Sequence sequence, bool completeSequence = true)
+        public static void KillAndGetNewSequence(ref Sequence sequence, bool completeSequence = true)
         {
             if (sequence != null && sequence.IsActive()) 
                 sequence.Kill(completeSequence); // also completes the sequence 
