@@ -7,7 +7,7 @@ namespace SpaceStrandedGame.Utilities
         /// <summary>
         /// Visualizes a normal Raycast
         /// </summary>
-        public static bool RayCast(Vector3 origin, Vector3 direction, out RaycastHit hit, float maxDistance, LayerMask layerMask, float duration = 1f)
+        public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hit, float maxDistance, LayerMask layerMask, float duration = 1f)
         {
             bool result = Physics.Raycast(origin, direction, out hit, maxDistance, layerMask);
 
