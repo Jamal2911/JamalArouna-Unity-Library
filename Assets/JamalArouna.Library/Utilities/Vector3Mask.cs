@@ -6,6 +6,9 @@ namespace JamalArouna.Utilities
     /// Represents a mask for the X, Y, and Z components of a Vector3.
     /// Can be used to enable/disable or filter individual components.
     /// </summary>
+    /// <remarks>
+    /// Created by Jamal Arouna, 2025.
+    /// </remarks>
     [System.Serializable]
     public struct Vector3Mask
     {

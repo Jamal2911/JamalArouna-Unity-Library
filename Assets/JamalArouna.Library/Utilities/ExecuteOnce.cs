@@ -6,6 +6,10 @@ namespace JamalArouna.Utilities
     /// <summary>
     /// Executes a single synchronous or asynchronous action only once.
     /// </summary>
+    /// </summary>
+    /// <remarks>
+    /// Created by Jamal Arouna, 2025.
+    /// </remarks>
     public class ExecuteOnce
     {
         private bool triggered = false;
