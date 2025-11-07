@@ -30,13 +30,13 @@ namespace JamalArouna.Utilities.Components
         protected virtual void Awake()
         {
             HasAwoken = true;
-            OnAwakeOnce();
+            OnAwake();
         }
 
         protected virtual void Start()
         {
             HasStarted = true;
-            OnStartOnce();
+            OnStart();
         }
 
         protected virtual void OnEnable()
@@ -60,14 +60,14 @@ namespace JamalArouna.Utilities.Components
         /// <summary>
         /// Called once during Awake().
         /// </summary>
-        protected virtual void OnAwakeOnce()
+        protected virtual void OnAwake()
         {
         }
 
         /// <summary>
         /// Called once during Start().
         /// </summary>
-        protected virtual void OnStartOnce()
+        protected virtual void OnStart()
         {
         }
 
