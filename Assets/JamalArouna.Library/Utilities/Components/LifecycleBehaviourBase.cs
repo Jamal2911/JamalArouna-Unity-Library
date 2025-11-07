@@ -10,7 +10,7 @@ namespace JamalArouna.Utilities.Components
     /// <remarks>
     /// Created by Jamal Arouna, 2025.
     /// </remarks>
-    public class LifecycleBehaviourBase : MonoBehaviour
+    public abstract class LifecycleBehaviourBase : MonoBehaviour
     {
         /// <summary>
         /// True after Awake() has been called.
