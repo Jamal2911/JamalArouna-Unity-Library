@@ -8,9 +8,6 @@ namespace JamalArouna.Utilities.Components
     /// <remarks>
     /// Created by Jamal Arouna, 2025.
     /// </remarks>
-#if ODIN_INSPECTOR
-    [HideMonoScript]
-#endif
     public class DontDestroyOnLoad : MonoBehaviour
     {
         /// <summary>
