@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace JamalArouna.Utilities
+namespace JamalArouna.Utilities.JLog
 {
     /// <summary>
     /// Utility class for colored logging with optional categories and log types.
@@ -23,7 +23,7 @@ namespace JamalArouna.Utilities
         /// <param name="message">Message to log.</param>
         /// <param name="willLog">If false, the log is skipped.</param>
         public static void Log(string message, bool willLog = true)
-            => LogMessage(message, Color.white, willLog, LogTypes.Log);
+            => LogMessage(message, Color.clear, willLog, LogTypes.Log);
 
         /// <summary>
         /// Logs a message with a custom color.
@@ -41,7 +41,7 @@ namespace JamalArouna.Utilities
         /// <param name="message">Message to log.</param>
         /// <param name="willLog">If false, the log is skipped.</param>
         public static void Log(string category, string message, bool willLog = true)
-            => LogMessage($"[{category}] {message}", Color.white, willLog, LogTypes.Log);
+            => LogMessage($"[{category}] {message}", Color.clear, willLog, LogTypes.Log);
 
         /// <summary>
         /// Logs a categorized message with a custom color.
@@ -79,9 +79,15 @@ namespace JamalArouna.Utilities
         private static void LogMessage(string message, Color color, bool willLog, LogTypes logType)
         {
             if (!willLog) return;
+            string logText;
 
-            string hex = ColorUtility.ToHtmlStringRGB(color);
-            string logText = $"<color=#{hex}>{message}</color>";
+            if (color != Color.clear)
+            {
+                string hex = ColorUtility.ToHtmlStringRGB(color);
+                logText = $"<color=#{hex}>{message}</color>";     
+            }
+            else
+                logText = message;
 
             switch (logType)
             {
