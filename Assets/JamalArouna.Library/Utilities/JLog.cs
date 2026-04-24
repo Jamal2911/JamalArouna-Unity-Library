@@ -24,12 +24,12 @@ namespace JamalArouna.Utilities.Logging
         /// Logs a message without color.
         /// </summary>
         /// <param name="message">The message to log.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Log(string message, Object context = null, bool willLog = true)
+        public static void Log(string message, bool willLog = true, Object context = null)
             => LogMessage(message, Color.clear, willLog, LogTypes.Log, context);
 
         /// <summary>
@@ -37,12 +37,12 @@ namespace JamalArouna.Utilities.Logging
         /// </summary>
         /// <param name="message">The message to log.</param>
         /// <param name="messageColor">The color applied to the message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Log(string message, Color messageColor, Object context = null, bool willLog = true)
+        public static void Log(string message, Color messageColor, bool willLog = true, Object context = null)
             => LogMessage(message, messageColor, willLog, LogTypes.Log, context);
 
         /// <summary>
@@ -50,12 +50,12 @@ namespace JamalArouna.Utilities.Logging
         /// </summary>
         /// <param name="category">The category label.</param>
         /// <param name="message">The message to log.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Log(string category, string message, Object context = null, bool willLog = true)
+        public static void Log(string category, string message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.clear, willLog, LogTypes.Log, context);
 
         /// <summary>
@@ -64,24 +64,24 @@ namespace JamalArouna.Utilities.Logging
         /// <param name="category">The category label.</param>
         /// <param name="message">The message to log.</param>
         /// <param name="color">The color applied to the message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Log(string category, string message, Color color, Object context = null, bool willLog = true)
+        public static void Log(string category, string message, Color color, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", color, willLog, LogTypes.Log, context);
 
         /// <summary>
         /// Logs an error message.
         /// </summary>
         /// <param name="message">The error message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Error(string message, Object context = null, bool willLog = true)
+        public static void Error(string message, bool willLog = true, Object context = null)
             => LogMessage(message, Color.red, willLog, LogTypes.Error, context);
 
         /// <summary>
@@ -89,24 +89,24 @@ namespace JamalArouna.Utilities.Logging
         /// </summary>
         /// <param name="category">The category label.</param>
         /// <param name="message">The error message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Error(string category, string message, Object context = null, bool willLog = true)
+        public static void Error(string category, string message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.red, willLog, LogTypes.Error, context);
 
         /// <summary>
         /// Logs a warning message.
         /// </summary>
         /// <param name="message">The warning message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Warning(string message, Object context = null, bool willLog = true)
+        public static void Warning(string message, bool willLog = true, Object context = null)
             => LogMessage(message, Color.yellow, willLog, LogTypes.Warning, context);
 
         /// <summary>
@@ -114,12 +114,12 @@ namespace JamalArouna.Utilities.Logging
         /// </summary>
         /// <param name="category">The category label.</param>
         /// <param name="message">The warning message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
         /// <param name="context">
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
-        /// <param name="willLog">If false, the message will not be logged.</param>
         [HideInCallstack]
-        public static void Warning(string category, string message, Object context = null, bool willLog = true)
+        public static void Warning(string category, string message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.yellow, willLog, LogTypes.Warning, context);
 
         /// <summary>
