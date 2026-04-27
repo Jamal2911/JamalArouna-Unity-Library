@@ -121,6 +121,31 @@ namespace JamalArouna.Utilities.Logging
         [HideInCallstack]
         public static void Warning(string category, string message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.yellow, willLog, LogTypes.Warning, context);
+        
+        /// <summary>
+        /// Logs a success message.
+        /// </summary>
+        /// <param name="message">The success message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
+        /// <param name="context">
+        /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
+        /// </param>
+        [HideInCallstack]
+        public static void Success(string message, bool willLog = true, Object context = null)
+            => LogMessage(message, Color.green, willLog, LogTypes.Warning, context);
+
+        /// <summary>
+        /// Logs a categorized success message.
+        /// </summary>
+        /// <param name="category">The category label.</param>
+        /// <param name="message">The success message.</param>
+        /// <param name="willLog">If false, the message will not be logged.</param>
+        /// <param name="context">
+        /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
+        /// </param>
+        [HideInCallstack]
+        public static void Success(string category, string message, bool willLog = true, Object context = null)
+            => LogMessage($"[{category}] {message}", Color.green, willLog, LogTypes.Warning, context);
 
         /// <summary>
         /// Handles the internal log formatting and output.
