@@ -132,7 +132,7 @@ namespace JamalArouna.Utilities.Logging
         /// </param>
         [HideInCallstack]
         public static void Success(string message, bool willLog = true, Object context = null)
-            => LogMessage(message, Color.green, willLog, LogTypes.Warning, context);
+            => LogMessage(message, Color.green, willLog, LogTypes.Log, context);
 
         /// <summary>
         /// Logs a categorized success message.
@@ -145,7 +145,7 @@ namespace JamalArouna.Utilities.Logging
         /// </param>
         [HideInCallstack]
         public static void Success(string category, string message, bool willLog = true, Object context = null)
-            => LogMessage($"[{category}] {message}", Color.green, willLog, LogTypes.Warning, context);
+            => LogMessage($"[{category}] {message}", Color.green, willLog, LogTypes.Log, context);
 
         /// <summary>
         /// Handles the internal log formatting and output.
