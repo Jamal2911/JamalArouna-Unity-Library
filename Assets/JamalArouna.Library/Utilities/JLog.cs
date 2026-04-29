@@ -29,8 +29,8 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Log(string message, bool willLog = true, Object context = null)
-            => LogMessage(message, Color.clear, willLog, LogTypes.Log, context);
+        public static void Log(object message, bool willLog = true, Object context = null)
+            => LogMessage(message.ToString(), Color.clear, willLog, LogTypes.Log, context);
 
         /// <summary>
         /// Logs a message with a specified color.
@@ -42,8 +42,8 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Log(string message, Color messageColor, bool willLog = true, Object context = null)
-            => LogMessage(message, messageColor, willLog, LogTypes.Log, context);
+        public static void Log(object message, Color messageColor, bool willLog = true, Object context = null)
+            => LogMessage(message.ToString(), messageColor, willLog, LogTypes.Log, context);
 
         /// <summary>
         /// Logs a message with a category prefix.
@@ -55,7 +55,7 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Log(string category, string message, bool willLog = true, Object context = null)
+        public static void Log(string category, object message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.clear, willLog, LogTypes.Log, context);
 
         /// <summary>
@@ -69,7 +69,7 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Log(string category, string message, Color color, bool willLog = true, Object context = null)
+        public static void Log(string category, object message, Color color, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", color, willLog, LogTypes.Log, context);
 
         /// <summary>
@@ -81,8 +81,8 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Error(string message, bool willLog = true, Object context = null)
-            => LogMessage(message, Color.red, willLog, LogTypes.Error, context);
+        public static void Error(object message, bool willLog = true, Object context = null)
+            => LogMessage(message.ToString(), Color.red, willLog, LogTypes.Error, context);
 
         /// <summary>
         /// Logs a categorized error message.
@@ -94,7 +94,7 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Error(string category, string message, bool willLog = true, Object context = null)
+        public static void Error(string category, object message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.red, willLog, LogTypes.Error, context);
 
         /// <summary>
@@ -106,8 +106,8 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Warning(string message, bool willLog = true, Object context = null)
-            => LogMessage(message, Color.yellow, willLog, LogTypes.Warning, context);
+        public static void Warning(object message, bool willLog = true, Object context = null)
+            => LogMessage(message.ToString(), Color.yellow, willLog, LogTypes.Warning, context);
 
         /// <summary>
         /// Logs a categorized warning message.
@@ -119,7 +119,7 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Warning(string category, string message, bool willLog = true, Object context = null)
+        public static void Warning(string category, object message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.yellow, willLog, LogTypes.Warning, context);
         
         /// <summary>
@@ -131,8 +131,8 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Success(string message, bool willLog = true, Object context = null)
-            => LogMessage(message, Color.green, willLog, LogTypes.Log, context);
+        public static void Success(object message, bool willLog = true, Object context = null)
+            => LogMessage(message.ToString(), Color.green, willLog, LogTypes.Log, context);
 
         /// <summary>
         /// Logs a categorized success message.
@@ -144,7 +144,7 @@ namespace JamalArouna.Utilities.Logging
         /// Optional Unity object used as the log context. When assigned, Unity highlights the object when the log entry is selected.
         /// </param>
         [HideInCallstack]
-        public static void Success(string category, string message, bool willLog = true, Object context = null)
+        public static void Success(string category, object message, bool willLog = true, Object context = null)
             => LogMessage($"[{category}] {message}", Color.green, willLog, LogTypes.Log, context);
 
         /// <summary>
