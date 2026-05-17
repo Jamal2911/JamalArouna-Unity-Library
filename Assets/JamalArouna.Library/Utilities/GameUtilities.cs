@@ -729,8 +729,12 @@ namespace JamalArouna.Library.Utilities
 
         #region Color Extensions
         
-        public static void SetAlpha(this Color color, float alpha) => color.a = alpha;
-        
+        public static Color SetAlpha(this Color color, float alpha)
+        {
+            color.a = alpha;
+            return color;
+        }
+
         public static string ToHex(this Color color) => "#" + ColorUtility.ToHtmlStringRGBA(color);
 
         #endregion
