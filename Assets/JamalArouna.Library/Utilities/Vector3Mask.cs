@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace JamalArouna.Utilities
+namespace JamalArouna.Library.Utilities
 {
     /// <summary>
     /// Represents a mask for the X, Y, and Z components of a Vector3.

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace JamalArouna.Utilities.Components
+namespace JamalArouna.Library.Utilities.Components
 {
     /// <summary>
     /// Abstract base class for MonoBehaviour-based singletons.

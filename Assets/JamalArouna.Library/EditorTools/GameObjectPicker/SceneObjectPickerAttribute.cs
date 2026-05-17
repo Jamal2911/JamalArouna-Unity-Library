@@ -1,6 +1,6 @@
 using System;
 
-namespace JamalArouna.EditorTools
+namespace JamalArouna.Library.EditorTools.GameObjectPicker
 {
     /// <summary>
     /// A custom attribute drawer.

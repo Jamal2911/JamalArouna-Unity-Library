@@ -3,7 +3,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 
-namespace JamalArouna.EditorTools
+namespace JamalArouna.Library.EditorTools.GameObjectPicker
 {
     public static class GlobalKeyEventHandler
     {

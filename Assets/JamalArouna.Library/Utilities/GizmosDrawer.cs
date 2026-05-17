@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace JamalArouna.Utilities
+namespace JamalArouna.Library.Utilities
 {
     /// <summary>
     /// GizmosDrawer class providing common game-related helper methods to draw gizmos.

@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace JamalArouna.Physics
+namespace JamalArouna.Library.Physics
 {
     /// <summary>
     /// Manages Unity physics events and exposes them via C# events for external subscription.

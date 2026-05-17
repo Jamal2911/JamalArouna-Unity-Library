@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace JamalArouna.Utilities.Components
+namespace JamalArouna.Library.Utilities.Components
 { 
     /// <summary>
     /// Synchronizes a Rigidbody with a moving and rotating platform while the Rigidbody stays on it.

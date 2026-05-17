@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace JamalArouna.Utilities
+namespace JamalArouna.Library.Utilities
 {
     /// <summary>
     /// Executes a single synchronous or asynchronous action only once.

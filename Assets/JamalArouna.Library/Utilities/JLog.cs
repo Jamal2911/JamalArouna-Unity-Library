@@ -1,9 +1,8 @@
 using UnityEngine;
-using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 using Object = UnityEngine.Object;
 
-namespace JamalArouna.Utilities.Logging
+namespace JamalArouna.Library.Utilities
 {
     /// <summary>
     /// Provides utility methods for logging messages with optional categories, colors, contexts, and log types.

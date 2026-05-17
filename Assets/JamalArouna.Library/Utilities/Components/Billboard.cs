@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace JamalArouna.Utilities.Components
+namespace JamalArouna.Library.Utilities.Components
 {
     /// <summary>
     /// Makes the object always face the main camera (billboard effect),

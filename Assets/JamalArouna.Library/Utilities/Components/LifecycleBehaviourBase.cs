@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace JamalArouna.Utilities.Components
+namespace JamalArouna.Library.Utilities.Components
 {
     /// <summary>
     /// A reusable base class providing reliable Unity lifecycle tracking.

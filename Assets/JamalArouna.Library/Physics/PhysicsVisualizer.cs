@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace SpaceStrandedGame.Utilities
+namespace JamalArouna.Library.Physics
 {
     public static class PhysicsVisualizer
     {
@@ -9,7 +9,7 @@ namespace SpaceStrandedGame.Utilities
         /// </summary>
         public static bool Raycast(Vector3 origin, Vector3 direction, out RaycastHit hit, float maxDistance, LayerMask layerMask, float duration = 1f)
         {
-            bool result = Physics.Raycast(origin, direction, out hit, maxDistance, layerMask);
+            bool result = UnityEngine.Physics.Raycast(origin, direction, out hit, maxDistance, layerMask);
 
             // Visualization
             Color color = result ? Color.green : Color.red;
@@ -31,7 +31,7 @@ namespace SpaceStrandedGame.Utilities
         /// </summary>
         public static bool SphereCast(Vector3 origin, float radius, Vector3 direction, out RaycastHit hit, float maxDistance, LayerMask layerMask, float duration = 1f)
         {
-            bool result = Physics.SphereCast(origin, radius, direction, out hit, maxDistance, layerMask);
+            bool result = UnityEngine.Physics.SphereCast(origin, radius, direction, out hit, maxDistance, layerMask);
 
             // Visualization
             Color color = result ? Color.green : Color.red;
@@ -53,7 +53,7 @@ namespace SpaceStrandedGame.Utilities
         /// </summary>
         public static bool BoxCast(Vector3 center, Vector3 halfExtents, Vector3 direction, Quaternion rotation, out RaycastHit hit, float maxDistance, LayerMask layerMask, float duration = 1f)
         {
-            bool result = Physics.BoxCast(center, halfExtents, direction, out hit, rotation, maxDistance, layerMask);
+            bool result = UnityEngine.Physics.BoxCast(center, halfExtents, direction, out hit, rotation, maxDistance, layerMask);
 
             // Visualization
             Color color = result ? Color.green : Color.red;
@@ -72,7 +72,7 @@ namespace SpaceStrandedGame.Utilities
         /// </summary>
         public static bool CapsuleCast(Vector3 p0, Vector3 p1, float radius, Vector3 direction, out RaycastHit hit, float maxDistance, LayerMask layerMask, float duration = 1f)
         {
-            bool result = Physics.CapsuleCast(p0, p1, radius, direction, out hit, maxDistance, layerMask);
+            bool result = UnityEngine.Physics.CapsuleCast(p0, p1, radius, direction, out hit, maxDistance, layerMask);
 
             // Visualization
             Color color = result ? Color.green : Color.red;
@@ -91,7 +91,7 @@ namespace SpaceStrandedGame.Utilities
         /// </summary>
         public static Collider[] OverlapSphere(Vector3 position, float radius, LayerMask layerMask, float duration = 1f)
         {
-            Collider[] hits = Physics.OverlapSphere(position, radius, layerMask);
+            Collider[] hits = UnityEngine.Physics.OverlapSphere(position, radius, layerMask);
 
             // Visualization
             Color color = hits.Length > 0 ? Color.yellow : Color.gray;
@@ -107,7 +107,7 @@ namespace SpaceStrandedGame.Utilities
         /// </summary>
         public static Collider[] OverlapBox(Vector3 center, Vector3 halfExtents, Quaternion rotation, LayerMask layerMask, float duration = 1f)
         {
-            Collider[] hits = Physics.OverlapBox(center, halfExtents, rotation, layerMask);
+            Collider[] hits = UnityEngine.Physics.OverlapBox(center, halfExtents, rotation, layerMask);
 
             // Visualization
             Color color = hits.Length > 0 ? Color.yellow : Color.gray;
@@ -123,7 +123,7 @@ namespace SpaceStrandedGame.Utilities
         /// </summary>
         public static Collider[] OverlapCapsule(Vector3 p0, Vector3 p1, float radius, LayerMask layerMask, float duration = 1f)
         {
-            Collider[] hits = Physics.OverlapCapsule(p0, p1, radius, layerMask);
+            Collider[] hits = UnityEngine.Physics.OverlapCapsule(p0, p1, radius, layerMask);
 
             // Visualization
             Color color = hits.Length > 0 ? Color.yellow : Color.gray;

@@ -1,4 +1,4 @@
-namespace JamalArouna.Utilities.Interfaces
+namespace JamalArouna.Library.Utilities.Interfaces
 {
     /// <summary>
     /// Basic state interface for a state machine.

@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
-using JamalArouna.Utilities.Components;
+using JamalArouna.Library.Utilities.Components;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,7 +12,7 @@ using Random = UnityEngine.Random;
 using DG.Tweening;
 #endif
 
-namespace JamalArouna.Utilities
+namespace JamalArouna.Library.Utilities
 {
     /// <summary>
     /// Utility class providing common game-related helper methods.

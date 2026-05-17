@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace JamalArouna.Physics
+namespace JamalArouna.Library.Physics
 {
     /// <summary>
     /// 
