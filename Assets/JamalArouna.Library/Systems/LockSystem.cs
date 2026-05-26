@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameData.Scripts.Shared.Utillities
+namespace JamalArouna.Library.Systems
 {
     [Serializable]
     public class LockSystem<TLock> where TLock : struct, Enum
@@ -17,6 +17,16 @@ namespace GameData.Scripts.Shared.Utillities
             lockCounts[lockType] = count + 1;
 
             return new LockHandle(this, lockType);
+        }
+        
+        public IDisposable LockAll()
+        {
+            List<IDisposable> handles = new();
+
+            foreach (TLock lockType in Enum.GetValues(typeof(TLock)))
+                handles.Add(Lock(lockType));
+
+            return new MultiLockHandle(handles);
         }
     
         private void Unlock(TLock lockType)

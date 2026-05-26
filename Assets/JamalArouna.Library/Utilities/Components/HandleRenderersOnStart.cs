@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameData.Scripts.Shared
+namespace JamalArouna.Library.Utilities.Components
 {
     public class HandleRenderersOnStart : MonoBehaviour
     {
