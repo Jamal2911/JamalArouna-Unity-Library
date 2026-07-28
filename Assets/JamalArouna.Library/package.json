@@ -1,9 +1,18 @@
 {
   "name": "com.jamal.arouna.library",
-  "version": "1.0.0",
-  "displayName": "JamalArouna.Library",
-  "description": "A collection of useful utilities and components.",
-  "unity": "2021.3",
+  "version": "2.0.0",
+  "displayName": "Jamal Arouna Library",
+  "description": "Focused runtime utilities, extensions, components and editor diagnostics for Unity.",
+  "unity": "6000.0",
+  "keywords": [
+    "utilities",
+    "extensions",
+    "components"
+  ],
+  "dependencies": {
+    "com.unity.modules.animation": "1.0.0",
+    "com.unity.modules.physics": "1.0.0"
+  },
   "author": {
     "name": "Jamal Arouna",
     "url": "https://github.com/Jamal2911"

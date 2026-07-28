@@ -1,31 +1,66 @@
-# 🧰 Jamal Arouna Unity Library
+# Jamal Arouna Unity Library
 
-A collection of reusable utilities, interfaces, and components for Unity projects.  
-Designed for clean, scalable, and modular code architecture.
+A focused collection of reusable runtime utilities, extensions, components, and
+editor diagnostics for Unity 6.
 
-> ✍️ Created and maintained by **Jamal Arouna**
+## Installation
 
----
+In Unity, open `Window > Package Manager`, choose `Add package from Git URL`,
+and enter:
 
-## 📦 Installation
-
-### 🔽 Manual Download
-
-Download only the `JamalArouna.Library` folder (no need to clone the full repository):
-
-[📥 Download JamalArouna.Library manually](https://download-directory.github.io/?url=https://github.com/Jamal2911/JamalArouna-Unity-Library/tree/main/Assets/JamalArouna.Library)
-
-> ⚠️ If you manually add the files to your project, you can safely remove any `.asmdef` files if you don’t need them.
-
----
-
-### 📦 Unity Package Manager (UPM)
-
-To add the package via Git URL:
-
-1. Open Unity: `Window > Package Manager`
-2. Click the `+` button → `Add package from Git URL...`
-3. Paste the following URL:
-
-```plaintext
+```text
 https://github.com/Jamal2911/JamalArouna-Unity-Library.git?path=Assets/JamalArouna.Library
+```
+
+## Structure
+
+```text
+JamalArouna.Library/
+├── Runtime/
+│   ├── Async/
+│   ├── Collections/
+│   ├── Components/
+│   ├── Diagnostics/
+│   ├── Execution/
+│   ├── Extensions/
+│   ├── Math/
+│   ├── Physics/
+│   ├── StateMachine/
+│   └── Systems/
+└── Editor/
+    └── Diagnostics/
+```
+
+The folder structure and namespaces match. Runtime code is compiled into
+`JamalArouna.Library`; editor-only code is isolated in
+`JamalArouna.Library.Editor`.
+
+## Main APIs
+
+- `JamalArouna.Library.Async.AwaitableUtility`
+- `JamalArouna.Library.Collections.CollectionExtensions`
+- `JamalArouna.Library.Components`
+- `JamalArouna.Library.Diagnostics.JLog`
+- `JamalArouna.Library.Execution`
+- `JamalArouna.Library.Extensions`
+- `JamalArouna.Library.Math`
+- `JamalArouna.Library.Physics`
+- `JamalArouna.Library.StateMachine`
+- `JamalArouna.Library.Systems.LockSystem<TLock>`
+
+## Version 2 migration
+
+Version 2 intentionally removes compatibility aliases. Replace the former
+`JamalArouna.Library.Utilities` imports with the focused namespaces above.
+`GameUtilities` was removed and its useful operations moved to dedicated
+utility and extension classes.
+
+The unfinished GameObject Picker and its reflection-based global key hook were
+removed. DOTween and Odin are no longer optional compile-time dependencies.
+
+See [CHANGELOG.md](Assets/JamalArouna.Library/CHANGELOG.md) for the detailed
+breaking-change summary.
+
+## License
+
+Copyright © Jamal Arouna.
